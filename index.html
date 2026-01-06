@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Sholat Subuh Lengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            background-color: #f0f9ff;
+        }
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 3rem;
+            direction: rtl;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .illustration-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-radius: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border: 3px solid #e0f2fe;
+            min-width: 180px;
+        }
+        .rakaat-header {
+            background: linear-gradient(to right, #0284c7, #38bdf8);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+        }
+        .transition-card {
+            margin: 2rem auto;
+            max-width: 350px;
+            position: relative;
+        }
+        .transition-bubble {
+            background: #fefce8;
+            border: 3px solid #fde047;
+            color: #854d0e;
+            padding: 1.25rem;
+            border-radius: 2rem;
+            text-align: center;
+            font-weight: 800;
+            box-shadow: 0 8px 15px -3px rgba(250, 204, 21, 0.3);
+        }
+        .transition-arrow {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+            margin: 0 auto;
+        }
+
+        /* Animasi Sederhana */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .animate-breathe {
+            animation: breathe 3s infinite ease-in-out;
+        }
+        
+        .char-head { animation: headBob 4s infinite ease-in-out; }
+        @keyframes headBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <header class="max-w-4xl mx-auto text-center mb-16">
+        <div class="inline-block bg-white p-2 rounded-full shadow-sm mb-4">
+            <span class="text-3xl">👨‍👩‍👧‍👦</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-sky-600 mb-4 tracking-tight">Ayo Sholat Subuh!</h1>
+        <p class="text-slate-600 text-xl max-w-2xl mx-auto font-medium">Panduan lengkap langkah-langkah sholat dengan ilustrasi gerakan yang benar.</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto space-y-16">
+        
+        <!-- SECTION PERSIAPAN -->
+        <section>
+            <div class="text-center"><div class="rakaat-header">✨ Langkah Persiapan</div></div>
+            <div class="space-y-6" id="prep-steps"></div>
+        </section>
+
+        <!-- SECTION RAKAAT 1 -->
+        <section>
+            <div class="text-center"><div class="rakaat-header">1️⃣ Rakaat Pertama</div></div>
+            <div class="space-y-6" id="rakaat-1-steps"></div>
+        </section>
+
+        <!-- SECTION RAKAAT 2 -->
+        <section>
+            <div class="text-center"><div class="rakaat-header">2️⃣ Rakaat Kedua</div></div>
+            <div class="space-y-6" id="rakaat-2-steps"></div>
+        </section>
+
+        <!-- SECTION PENUTUP -->
+        <section>
+            <div class="text-center"><div class="rakaat-header">🏁 Penutup Sholat</div></div>
+            <div class="space-y-6" id="final-steps"></div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto text-center mt-20 pb-20">
+        <div class="bg-white rounded-3xl p-8 shadow-xl border-t-8 border-sky-400">
+            <h2 class="text-2xl font-bold text-sky-700 mb-2">Alhamdulillah!</h2>
+            <p class="text-slate-600">Teruslah berlatih ya, Allah sangat sayang kepada anak yang rajin sholat.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Warna Karakter: Skin: #FFDBAC, Baju: #FFFFFF (Koko), Sarung: #0EA5E9 (Biru), Peci: #1E293B (Hitam)
+        const charAssets = {
+            head: `<g class="char-head">
+                    <circle cx="100" cy="50" r="18" fill="#FFDBAC" /> <!-- Wajah -->
+                    <path d="M82 45 Q 100 25 118 45 L 118 35 Q 100 20 82 35 Z" fill="#1E293B" /> <!-- Peci -->
+                    <circle cx="93" cy="52" r="1.5" fill="#334155" /> <!-- Mata Kiri -->
+                    <circle cx="107" cy="52" r="1.5" fill="#334155" /> <!-- Mata Kanan -->
+                    <path d="M96 60 Q 100 63 104 60" stroke="#334155" stroke-width="1" fill="none" /> <!-- Senyum -->
+                   </g>`,
+            body: `<path d="M80 68 L120 68 L125 120 L75 120 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" /> <!-- Baju Koko -->
+                   <path d="M75 120 L125 120 L120 160 L80 160 Z" fill="#0EA5E9" /> <!-- Sarung -->
+                   <rect x="85" y="160" width="10" height="15" rx="2" fill="#FFDBAC" /> <!-- Kaki Kiri -->
+                   <rect x="105" y="160" width="10" height="15" rx="2" fill="#FFDBAC" /> <!-- Kaki Kanan -->`
+        };
+
+        const svgs = {
+            berdiri: `<svg viewBox="0 0 200 200" class="w-40 h-40 animate-breathe">
+                ${charAssets.body}
+                ${charAssets.head}
+                <path d="M80 75 L70 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" /> <!-- Tangan Kiri -->
+                <path d="M120 75 L130 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" /> <!-- Tangan Kanan -->
+            </svg>`,
+            takbir: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                ${charAssets.body}
+                ${charAssets.head}
+                <path d="M80 75 L60 40" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" /> <!-- Angkat Kiri -->
+                <path d="M120 75 L140 40" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" /> <!-- Angkat Kanan -->
+                <rect x="52" y="30" width="15" height="12" rx="4" fill="#FFDBAC" /> <!-- Telapak Kiri -->
+                <rect x="133" y="30" width="15" height="12" rx="4" fill="#FFDBAC" /> <!-- Telapak Kanan -->
+            </svg>`,
+            sedekap: `<svg viewBox="0 0 200 200" class="w-40 h-40 animate-breathe">
+                ${charAssets.body}
+                ${charAssets.head}
+                <path d="M80 75 Q 100 100 115 85" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" fill="none" /> <!-- Lengan Kiri -->
+                <path d="M120 75 Q 100 100 85 85" stroke="#F1F5F9" stroke-width="12" stroke-linecap="round" fill="none" /> <!-- Lengan Kanan -->
+                <rect x="90" y="80" width="20" height="10" rx="3" fill="#FFDBAC" /> <!-- Telapak bersedekap -->
+            </svg>`,
+            ruku: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                <g transform="rotate(70 100 130)">
+                    <path d="M80 68 L120 68 L125 120 L75 120 Z" fill="#FFFFFF" /> 
+                    ${charAssets.head}
+                    <path d="M80 75 L80 120" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" />
+                    <path d="M120 75 L120 120" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" />
+                </g>
+                <path d="M90 130 L110 130 L105 170 L95 170 Z" fill="#0EA5E9" /> <!-- Kaki ditekuk -->
+                <rect x="92" y="170" width="8" height="10" fill="#FFDBAC" />
+                <rect x="100" y="170" width="8" height="10" fill="#FFDBAC" />
+            </svg>`,
+            sujud: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                <path d="M40 170 L160 170" stroke="#CBD5E1" stroke-width="4" /> <!-- Lantai -->
+                <path d="M60 170 L140 170 L130 140 L80 140 Z" fill="#0EA5E9" /> <!-- Bagian bawah -->
+                <path d="M80 140 L60 170 L40 170 L70 110 Z" fill="#FFFFFF" /> <!-- Badan membungkuk -->
+                <circle cx="55" cy="170" r="15" fill="#FFDBAC" /> <!-- Kepala menyentuh lantai -->
+                <path d="M45 160 Q 55 145 65 160" fill="#1E293B" /> <!-- Peci terlihat dari samping -->
+                <rect x="80" y="160" width="20" height="10" rx="3" fill="#FFDBAC" /> <!-- Tangan -->
+            </svg>`,
+            duduk: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                <rect x="70" y="120" width="60" height="40" rx="10" fill="#0EA5E9" /> <!-- Sarung duduk -->
+                <path d="M75 70 L125 70 L120 120 L80 120 Z" fill="#FFFFFF" /> <!-- Badan tegak -->
+                ${charAssets.head}
+                <path d="M80 80 L75 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+                <path d="M120 80 L125 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+            </svg>`,
+            qunut: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                ${charAssets.body}
+                ${charAssets.head}
+                <path d="M85 80 L75 60" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" /> <!-- Menadah tangan -->
+                <path d="M115 80 L125 60" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+                <rect x="68" y="52" width="12" height="10" rx="3" fill="#FFDBAC" />
+                <rect x="120" y="52" width="12" height="10" rx="3" fill="#FFDBAC" />
+            </svg>`,
+            salam: `<svg viewBox="0 0 200 200" class="w-40 h-40">
+                ${charAssets.body}
+                <g transform="translate(10, 0)">
+                    <circle cx="105" cy="50" r="18" fill="#FFDBAC" /> <!-- Menoleh -->
+                    <path d="M95 45 Q 110 30 125 45" fill="#1E293B" /> <!-- Peci dari samping -->
+                </g>
+                <path d="M80 75 L70 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+                <path d="M120 75 L130 120" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+            </svg>`
+        };
+
+        const steps = {
+            prep: [
+                { type: 'posisi', title: "Niat Sholat Subuh", desc: "Berdiri tegak menghadap Kiblat.", arabic: "اُصَلِّى فَرْضَ الصُّبْحِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً لِلّٰهِ تَعَالَى", latin: "Ushallii fardhash shubhi rak'ataini mustaqbilal qiblati adaa-an lillaahi ta'aalaa.", meaning: "Aku niat sholat fardu Subuh dua rakaat menghadap kiblat karena Allah Ta'ala.", svg: svgs.berdiri },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Gerakan: Takbiratul Ihram" },
+                { type: 'posisi', title: "Takbiratul Ihram", desc: "Mengangkat kedua tangan hingga sejajar telinga.", arabic: "اَللهُ اَكْبَرُ", latin: "Allahu Akbar", meaning: "Allah Maha Besar.", svg: svgs.takbir }
+            ],
+            rakaat1: [
+                { type: 'posisi', title: "Bersedekap & Iftitah", desc: "Tangan kanan di atas tangan kiri. Membaca doa Iftitah & Al-Fatihah.", arabic: "اَللهُ اَكْبَرُ كَبِيْرًا وَالْحَمْدُ لِلّهِ كَثِيْرًا وَسُبْحَانَ اللهِ بُكْرَةً وَاَصِيْلًا. اِنِّى وَجَّهْتُ وَجْهِيَ لِلَّذِيْ فَطَرَ السَّمَاوَاتِ وَالْأَرْضَ حَنِيْفًا مُسْلِمًا وَمَا أَنَا مِنَ الْمُشْرِكِيْنَ. اِنَّ صَلَاتِيْ وَنُسُكِيْ وَمَحْيَايَ وَمَمَاتِيْ لِلَّهِ رَبِّ الْعَالَمِيْنَ. لَا شَرِيْكَ لَهُ وَبِذَلِكَ اُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِيْنَ", latin: "Allahu akbar kabiiraw wal hamdu lillaahi katsiira... Inna shalaatii wa nusukii wa mahyaaya wa mamaatii lillaahi rabbil 'aalamiin...", meaning: "Sesungguhnya sholatku, ibadahku, hidup dan matiku hanyalah untuk Allah...", svg: svgs.sedekap },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Perpindahan ke Ruku'" },
+                { type: 'posisi', title: "Ruku'", desc: "Membungkuk hingga punggung rata, tangan memegang lutut.", arabic: "سُبْحَانَ رَبِّيَ الْعَظِيْمِ وَبِحَمْدِهِ (٣x)", latin: "Subhaana rabbiyal 'azhiimi wa bihamdih.", meaning: "Maha Suci Tuhanku Yang Maha Agung.", svg: svgs.ruku },
+                { type: 'transisi', text: "SAMI'ALLAHU LIMAN HAMIDAH", label: "Bangun untuk I'tidal" },
+                { type: 'posisi', title: "I'tidal", desc: "Berdiri tegak kembali setelah ruku'.", arabic: "رَبَّنَا لَكَ الْحَمْدُ مِلْءَ السَّمَاوَاتِ وَمِلْءَ الْأَرْضِ وَمِلْءَ مَا شِئْتَ مِنْ شَيْءٍ بَعْدُ", latin: "Rabbanaa lakal hamdu mil'us samaawaati wa mil'ul ardhi...", meaning: "Wahai Tuhan kami, bagi-Mu segala puji.", svg: svgs.berdiri },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Turun untuk Sujud" },
+                { type: 'posisi', title: "Sujud Pertama", desc: "Dahi, hidung, tangan, lutut & ujung kaki menyentuh lantai.", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ (٣x)", latin: "Subhaana rabbiyal a'laa wa bihamdih.", meaning: "Maha Suci Tuhanku Yang Maha Tinggi.", svg: svgs.sujud },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Bangun untuk Duduk" },
+                { type: 'posisi', title: "Duduk Antara Dua Sujud", desc: "Duduk tegak bersimpuh.", arabic: "رَبِّ اغْفِرْ لِيْ وَارْحَمْنِيْ وَاجْبURْنِيْ وَارْفَعْنِيْ وَارْزُقْنِيْ وَاهْدِنِيْ وَعَافِنِيْ وَاعْفُ عَنِّيْ", latin: "Rabbighfirlii warhamnii wajburnii...", meaning: "Ya Allah ampunilah aku, sayangilah aku.", svg: svgs.duduk },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Turun Sujud Kedua" },
+                { type: 'posisi', title: "Sujud Kedua", desc: "Melakukan sujud yang kedua.", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى...", latin: "Subhaana rabbiyal a'laa...", meaning: "Maha Suci Tuhanku Yang Maha Tinggi.", svg: svgs.sujud }
+            ],
+            rakaat2: [
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Bangun ke Rakaat Kedua" },
+                { type: 'posisi', title: "Berdiri Rakaat Kedua", desc: "Ulangi Al-Fatihah, Ruku', hingga I'tidal.", arabic: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ...", latin: "Lakukan gerakan sama seperti rakaat 1.", meaning: "Gerakan rakaat kedua diawali dengan berdiri tegak.", svg: svgs.sedekap },
+                { type: 'transisi', text: "SAMI'ALLAHU LIMAN HAMIDAH", label: "I'tidal Rakaat Kedua" },
+                { type: 'posisi', title: "Doa Qunut Subuh", desc: "Dibaca saat I'tidal pada rakaat terakhir Subuh.", arabic: "اَللّٰهُمَّ اهْدِنِىْ فِيْمَنْ هَدَيْتَ، وَعَافِنِى فِيْمَنْ عَافَيْتَ، وَتَوَلَّنِىْ فِيْمَنْ تَوَلَّيْتَ، وَبَارِكْ لِىْ فِيْمَا اَعْطَيْتَ، وَقِنِيْ شَرَّمَا قَضَيْتَ، فَاِنَّكَ تَقْضِىْ وَلاَيُقْضٰى عَلَيْكَ، وَاِ نَّهُ لاَيَذِلُّ مَنْ وَالَيْتَ، وَلاَيَعِزُّ مَنْ عَادَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ، فَلَكَ الْحَمْدُ عَلَى مَاقَضَيْتَ، وَاَسْتَغْفِرُكَ وَاَتُوْبُ اِلَيْكَ...", latin: "Allaahummah-dinii fii man hadait, wa 'aafinii fii man 'aafait...", meaning: "Ya Allah, berilah aku petunjuk sebagaimana orang-orang yang telah Engkau beri petunjuk...", svg: svgs.qunut },
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Lanjut Sujud Akhir" },
+                { type: 'posisi', title: "Sujud & Duduk", desc: "Lakukan sujud terakhir sebelum Tahiyat.", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى...", latin: "Sujud kedua di rakaat terakhir.", meaning: "Maha Suci Tuhanku Yang Maha Tinggi.", svg: svgs.sujud }
+            ],
+            final: [
+                { type: 'transisi', text: "ALLAHU AKBAR", label: "Duduk untuk Tahiyat" },
+                { type: 'posisi', title: "Tahiyat Akhir", desc: "Membaca Tasyahud & Sholawat Ibrahimiyyah lengkap.", arabic: "اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ. اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ. اَلسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ. أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ. اَللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ", latin: "At-tahiyyaatul mubaarakatus shalawaatuth thayyibaatu lillaah. Assalaamu 'alaika ayyuhan nabiyyu... Allaahumma shalli 'alaa Muhammad wa 'alaa aali Muhammad...", meaning: "Segala penghormatan yang berkat... Ya Allah limpahkanlah rahmat kepada Nabi Muhammad...", svg: svgs.duduk },
+                { type: 'posisi', title: "Salam", desc: "Menoleh ke kanan lalu ke kiri.", arabic: "اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ", latin: "Assalaamu 'alaikum wa rahmatullaah.", meaning: "Semoga keselamatan dan rahmat Allah dilimpahkan kepadamu.", svg: svgs.salam }
+            ]
+        };
+
+        function renderSteps(stepArray, containerId) {
+            const container = document.getElementById(containerId);
+            stepArray.forEach(step => {
+                if (step.type === 'transisi') {
+                    const trans = document.createElement('div');
+                    trans.className = "transition-card";
+                    trans.innerHTML = `
+                        <div class="transition-arrow"></div>
+                        <div class="transition-bubble">
+                            <p class="text-[11px] uppercase tracking-widest text-amber-500 mb-1">${step.label}</p>
+                            <p class="text-sm text-slate-500 font-medium">Sambil Bergerak, Ucapkan:</p>
+                            <p class="text-2xl font-black mt-1 text-amber-600">${step.text}</p>
+                        </div>
+                        <div class="transition-arrow"></div>
+                    `;
+                    container.appendChild(trans);
+                } else {
+                    const card = document.createElement('div');
+                    card.className = "step-card bg-white rounded-3xl shadow-sm p-6 flex flex-col md:flex-row gap-8 items-center border border-slate-100";
+                    card.innerHTML = `
+                        <div class="illustration-container flex-shrink-0">
+                            ${step.svg}
+                        </div>
+                        <div class="flex-grow w-full text-center md:text-left">
+                            <h3 class="text-2xl font-extrabold text-sky-800 mb-1">${step.title}</h3>
+                            <p class="text-slate-500 mb-5 font-medium italic text-sm">${step.desc}</p>
+                            <div class="bg-blue-50/50 rounded-2xl p-5 space-y-5 border border-blue-100">
+                                <div class="arabic text-slate-800">${step.arabic}</div>
+                                <div class="text-sky-700 font-bold italic text-sm md:text-base border-t border-blue-200 pt-4">"${step.latin}"</div>
+                                <div class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                                    <span class="font-black text-sky-400 uppercase tracking-widest text-[10px]">ARTINYA</span><br>
+                                    ${step.meaning}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        renderSteps(steps.prep, 'prep-steps');
+        renderSteps(steps.rakaat1, 'rakaat-1-steps');
+        renderSteps(steps.rakaat2, 'rakaat-2-steps');
+        renderSteps(steps.final, 'final-steps');
+    </script>
+</body>
+</html>
